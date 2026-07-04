@@ -9,14 +9,14 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("i2i Simulation starting...");
 
-        // Veritabanina Baglanti
+        // Veritabanına Baglantı
         try (IgniteClient client = IgniteClient.builder()
                 .addresses("127.0.0.1:10800")
                 .build()) {
 
             System.out.println("Connected to Apache Ignite 3 node successfully.");
 
-            // Tablo Olusturma
+            // Tablo Oluşturma
             client.sql().execute(null,
                     "CREATE TABLE IF NOT EXISTS Subscriber (" +
                     "customerId VARCHAR PRIMARY KEY, " +
@@ -25,11 +25,11 @@ public class Main {
                     "callUsage INT)"
             );
 
-            // Adim 5: Tabloyu Temizleme
+            // Tabloyu Temizleme
             client.sql().execute(null, "DELETE FROM Subscriber");
             System.out.println("Table cleared and ready for new simulation.");
 
-            // Adim 6: 5 Dummy Subscriber Ekleme
+            //  5 Dummy Subscriber Ekleme
             System.out.println("Inserting 5 dummy subscribers with initial values 0...");
             for (int i = 1; i <= 5; i++) {
                 String custId = "CUST-" + i;
@@ -39,7 +39,7 @@ public class Main {
             }
             System.out.println("Subscribers inserted successfully.");
 
-            // Adim 7: Simulasyon (Veri Cekme ve Guncelleme)
+            //  Simülasyon (Veri çekme ve güncelleme)
             System.out.println("Running usage simulation...");
             Random random = new Random();
             
@@ -59,7 +59,7 @@ public class Main {
             }
             System.out.println("Simulation completed, database updated.");
 
-            // Adim 8: Son Durumu Konsola Yazdirma
+            //  Son Durumu Konsola Yazdırma
             System.out.println("\nFINAL SUBSCRIBER STATES:");
             try (ResultSet<SqlRow> finalRs = client.sql().execute(null, "SELECT customerId, dataUsage, smsUsage, callUsage FROM Subscriber")) {
                 while (finalRs.hasNext()) {
