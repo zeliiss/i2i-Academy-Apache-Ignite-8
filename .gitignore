@@ -1,0 +1,12 @@
+# Maven
+target/
+*.class
+
+# IDE ve VS Code Ayarları
+.vscode/
+.idea/
+*.iml
+
+# İşletim sistemi kalıntıları
+.DS_Store
+Thumbs.db
